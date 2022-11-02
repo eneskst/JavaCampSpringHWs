@@ -36,19 +36,19 @@ public class ProgrammingLanguagesController {
 		return programmingLanguageService.getById(id);
 	}
 
-	@PostMapping("/add-programming-language/{id}")
+	@PostMapping("/add-programming-language")
 	public void addProgrammingLanguage(@RequestBody ProgrammingLanguage programmingLanguage) throws Exception {
 		programmingLanguageService.addProgrammingLanguage(programmingLanguage);
 
 	}
 
-	@PutMapping("/update-programming-language/{id}")
+	@PutMapping("/update-programming-language")
 	public void updateProgrammingLanguage(@RequestBody ProgrammingLanguage programmingLanguage) throws Exception {
 		programmingLanguageService.updateProgrammingLanguage(programmingLanguage);
 
 	}
 
-	@DeleteMapping("/delete-programming-language/{id}")
+	@DeleteMapping("/delete-programming-language")
 	public void deleteProgrammingLanguage(@PathVariable int id) throws Exception {
 		programmingLanguageService.deleteProgrammingLanguage(id);
 
