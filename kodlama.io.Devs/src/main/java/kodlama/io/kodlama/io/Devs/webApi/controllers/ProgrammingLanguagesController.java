@@ -5,15 +5,18 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import kodlama.io.kodlama.io.Devs.business.abstracts.ProgrammingLanguageService;
-import kodlama.io.kodlama.io.Devs.entities.conceretes.ProgrammingLanguage;
+import kodlama.io.kodlama.io.Devs.business.request.CreateProgrammingLanguageRequest;
+import kodlama.io.kodlama.io.Devs.business.request.DeleteProgrammingLanguageRequest;
+import kodlama.io.kodlama.io.Devs.business.request.GetByIdProgrammingLanguageRequest;
+import kodlama.io.kodlama.io.Devs.business.request.UpdateProgrammingLanguageRequest;
+import kodlama.io.kodlama.io.Devs.business.responses.GetAllProgrammingLanguagesResponse;
+import kodlama.io.kodlama.io.Devs.business.responses.GetByIdProgrammingLanguageResponse;
 
 @RestController
 @RequestMapping("/api/programminglanguages")
@@ -27,30 +30,31 @@ public class ProgrammingLanguagesController {
 	}
 
 	@GetMapping("/getall")
-	public List<ProgrammingLanguage> getAll() {
+	public List<GetAllProgrammingLanguagesResponse> getAll() {
 		return programmingLanguageService.getAll();
 	}
 
 	@GetMapping("/getbyid/{id}")
-	public ProgrammingLanguage getById(@PathVariable int id) {
-		return programmingLanguageService.getById(id);
+	public GetByIdProgrammingLanguageResponse getById(GetByIdProgrammingLanguageRequest getByIdProgrammingLanguageRequest) {
+		return programmingLanguageService.getByLanguageId(getByIdProgrammingLanguageRequest);
+		
 	}
 
-	@PostMapping("/add-programming-language")
-	public void addProgrammingLanguage(@RequestBody ProgrammingLanguage programmingLanguage) throws Exception {
-		programmingLanguageService.addProgrammingLanguage(programmingLanguage);
-
-	}
-
-	@PutMapping("/update-programming-language")
-	public void updateProgrammingLanguage(@RequestBody ProgrammingLanguage programmingLanguage) throws Exception {
-		programmingLanguageService.updateProgrammingLanguage(programmingLanguage);
+	@PostMapping(value = "/add")
+	public void addProgrammingLanguage(CreateProgrammingLanguageRequest createProgrammingLanguageRequest) throws Exception {
+		programmingLanguageService.addProgrammingLanguage(createProgrammingLanguageRequest);
 
 	}
 
-	@DeleteMapping("/delete-programming-language")
-	public void deleteProgrammingLanguage(@PathVariable int id) throws Exception {
-		programmingLanguageService.deleteProgrammingLanguage(id);
+	@PutMapping(value = "/update")
+	public void updateProgrammingLanguage(UpdateProgrammingLanguageRequest updateProgrammingLanguageRequest) throws Exception {
+		programmingLanguageService.updateProgrammingLanguage(updateProgrammingLanguageRequest);
+
+	} 
+
+	@DeleteMapping(value="/delete")
+	public void deleteProgrammingLanguage(DeleteProgrammingLanguageRequest deleteProgrammingLanguageRequest) throws Exception {
+		programmingLanguageService.deleteProgrammingLanguage(deleteProgrammingLanguageRequest);
 
 	}
 
